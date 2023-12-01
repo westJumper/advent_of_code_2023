@@ -1,6 +1,5 @@
 const f = require('fs')
 const readline = require('readline')
-const { isNumberObject } = require('util/types')
 var inputFile = 'input.txt'
 
 var reader = readline.createInterface({
