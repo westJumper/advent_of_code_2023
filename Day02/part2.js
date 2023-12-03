@@ -1,4 +1,3 @@
-const { throws } = require('assert')
 const f = require('fs')
 const readline = require('readline')
 var inputFile = 'input.txt'
