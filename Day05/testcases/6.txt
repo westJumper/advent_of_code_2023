@@ -1,0 +1,5 @@
+seeds: 78 42 82 34
+
+temperature-to-humidity map:
+0 69 1
+1 0 69
