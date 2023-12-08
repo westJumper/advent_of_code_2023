@@ -1,8 +1,5 @@
 const f = require('fs')
-var inputFile = 'input.txt'
-
-// 78251007 - too low
-// 87449461
+var inputFile = 'test.txt'
 
 f.readFile(inputFile, 'utf8', (err, data) => {
   if (err) {

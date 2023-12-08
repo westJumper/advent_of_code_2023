@@ -1,5 +1,5 @@
 // screw parsing input, put it in as variables
-var run = 'input2' // ['test1', 'test2', 'input1', 'input2']
+var run = 'test1' // ['test1', 'test2', 'input1', 'input2']
 var time
 var distance
 

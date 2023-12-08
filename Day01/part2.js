@@ -1,6 +1,6 @@
 const f = require('fs')
 const readline = require('readline')
-var inputFile = 'input.txt'
+var inputFile = 'test.txt'
 
 var reader = readline.createInterface({
   input: f.createReadStream(inputFile),
