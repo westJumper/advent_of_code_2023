@@ -8,6 +8,7 @@ var reader = readline.createInterface({
 
 // for evaluating hands in the same bucket based on indexOf
 var cardsStrength = [
+  'J',
   '2',
   '3',
   '4',
@@ -17,7 +18,6 @@ var cardsStrength = [
   '8',
   '9',
   'T',
-  'J',
   'Q',
   'K',
   'A',
@@ -72,8 +72,6 @@ reader.on('close', function () {
     // for only one hand in a bucket we do not need to sort
     if (same.length == 1) {
       currentScore = Number(same[0].score)
-      //console.log('currentscore: ' + currentScore)
-      //console.log('rank counter: ' + rankCounter)
       total = total + currentScore * rankCounter
       rankCounter++
     } else {
@@ -120,11 +118,27 @@ function numberOfCards(input) {
   inputArray.forEach((letter, index, array) => {
     result[letter] = result[letter] ? result[letter] + 1 : 1
   })
+
   var scoring = Object.values(result)
 
+  // sort high to low
   scoring.sort(function (a, b) {
     return b - a
   })
+
+  // update results to calculate jokers
+  // only if we have any joker and number of jokers is not 5 as then we do not need to recalculate
+  var numberOfJokers = result['J'] == 'undefined' ? 0 : result['J']
+  if (numberOfJokers > 0 && numberOfJokers != 5) {
+    // remove joker and add it to larger card
+
+    // remove joker card from the mix
+    scoring.splice(scoring.indexOf(numberOfJokers), 1)
+
+    // add joker card to the larger card
+    scoring[0] = scoring[0] + numberOfJokers
+  }
+
   return scoring
 }
 

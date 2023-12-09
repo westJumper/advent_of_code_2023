@@ -9,11 +9,12 @@ var reader = readline.createInterface({
 })
 
 var currentArray = [] // for storing ranges that we currently have
-var currentRangesMapTo = [] // for storing mapping destinations
+// origin with destination order in array is kept all the time, it is sorted on the way for faster processing though
 var currentRangesMapToOrigin = [] // for storing mapping origins
+var currentRangesMapTo = [] // for storing mapping destinations
 var mappings = [] // to store all origins and destinations for final calculation
 
-// parse the entire file first
+// parse the file first
 reader.on('line', function (line) {
   switch (lineType(line)) {
     case 'header':
