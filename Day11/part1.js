@@ -1,5 +1,5 @@
 const f = require('fs')
-var inputFile = 'input.txt'
+var inputFile = 'test.txt'
 var data = f.readFileSync(inputFile).toString()
 
 var lineLength = data.indexOf('\r') == -1 ? data.length : data.indexOf('\r') // handles when there is only one line without \r char
