@@ -6,16 +6,10 @@ var reader = readline.createInterface({
   input: f.createReadStream(inputFile),
 })
 
-var sum = 0
 var lines = []
 reader.on('line', function (line) {
   switch (getLineType(line)) {
     case 'empty':
-      var columns = getColumnsFromLines(lines)
-      for (let i = 0; i < columns.length; i++) {
-        sum = sum + calculateRockWeight(tilt(columns[i]))
-      }
-
       break
     case 'value':
       lines.push(line.replaceAll('\r\n', ''))
@@ -26,6 +20,11 @@ reader.on('line', function (line) {
 })
 
 reader.on('close', function () {
+  var sum = 0
+  var columns = getColumnsFromLines(lines)
+  for (let i = 0; i < columns.length; i++) {
+    sum = sum + calculateRockWeight(tilt(columns[i]))
+  }
   console.log(sum)
 })
 
@@ -52,14 +51,18 @@ function tilt(oneline) {
   oneline = oneline.split('')
   // this is not optimal but does the job
   for (let y = 0; y < lineLength; y++) {
+    var moved = false
     for (let i = 0; i < lineLength - 1; i++) {
       var current = oneline[i]
       var next = oneline[i + 1]
       if (current == '.' && next == 'O') {
         oneline.splice(i, 1, 'O')
         oneline.splice(i + 1, 1, '.')
+        moved = true
       }
     }
+    // makes it a bit faster as it does end when no more moves are there even before going through all options
+    if (!moved) return oneline
   }
 
   return oneline
